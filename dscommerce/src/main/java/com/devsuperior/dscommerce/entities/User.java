@@ -14,6 +14,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+    @Column(unique = true)//Configurando que o campo email quando convertido para o banco relacional essa coluna será unica
     private String email;
     private String phone;
     private LocalDate birthDate;
