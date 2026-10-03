@@ -5,6 +5,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 
+import java.util.Objects;
+
 @Embeddable
 public class OrderItemPK {
 
@@ -39,6 +41,21 @@ public class OrderItemPK {
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    @Override
+    public boolean equals(Object o) { //Nesse caso é uma chave composta, é necessário comparar os dois.
+        if (o == null || getClass() != o.getClass()) return false;
+
+        OrderItemPK that = (OrderItemPK) o;
+        return Objects.equals(order, that.order) && Objects.equals(product, that.product);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hashCode(order);
+        result = 31 * result + Objects.hashCode(product);
+        return result;
     }
 
 }
